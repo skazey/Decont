@@ -257,6 +257,9 @@ function formatCamionRemorca(input) {
 
 function sendWhatsApp() {
     const captureArea = document.getElementById('captureArea');
+    const numeComplet = document.getElementById('nume').value.trim();
+    const textMesaj = numeComplet ? `Decont: ${numeComplet}` : 'Decont completat';
+
     const inputs = captureArea.querySelectorAll('textarea, input[type="date"], input[type="time"]');
     const originalValues = [];
     
@@ -302,7 +305,7 @@ function sendWhatsApp() {
                 navigator.share({
                     files: [file],
                     title: 'Formular Decont',
-                    text: 'Decont completat'
+                    text: textMesaj
                 }).catch(() => {});
             } else {
                 const a = document.createElement('a');
@@ -310,8 +313,10 @@ function sendWhatsApp() {
                 a.download = 'Decont.png';
                 a.click();
                 
-                alert("Imaginea decontului a fost descărcată (Decont.png)! O puteți atașa direct pe WhatsApp.");
-                window.open("https://api.whatsapp.com/send", '_blank');
+                alert(`Imaginea decontului a fost descărcată (Decont.png)! O puteți atașa pe WhatsApp pentru ${textMesaj}.`);
+                
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMesaj)}`;
+                window.open(whatsappUrl, '_blank');
             }
         }, 'image/png');
     });
