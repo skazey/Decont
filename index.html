@@ -97,7 +97,6 @@
             width: 100%;
             overflow: hidden;
         }
-        /* Am actualizat selectorii pentru a se aplica noilor input-uri */
         .datetime-container input {
             flex: 1;
             min-width: 0;
@@ -105,13 +104,6 @@
             font-size: 13px;
             cursor: pointer;
             text-align: center;
-        }
-        .sub-label {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 2px;
-            padding-left: 2px;
-            font-weight: bold;
         }
         .btn-add {
             background: none;
@@ -178,9 +170,6 @@
             input, textarea {
                 font-size: 13px;
             }
-            .sub-label {
-                font-size: 11px;
-            }
         }
     </style>
 </head>
@@ -238,15 +227,13 @@
             <tr>
                 <td class="label">Perioada Staționare</td>
                 <td class="input-cell">
-                    <div class="sub-label">Data și ora început:</div>
                     <div class="datetime-container" style="margin-bottom: 8px;">
-                        <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data început" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora început" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
-                    <div class="sub-label">Data și ora sfârșit:</div>
                     <div class="datetime-container">
-                        <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data sfârșit" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora sfârșit" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
                     <button type="button" class="btn-add hide-on-capture" onclick="addStationare(this)">+ Adaugă încă o perioadă</button>
                 </td>
@@ -268,7 +255,6 @@
 </div>
 
 <script>
-// Funcții noi pentru gestiunea intuitivă a datelor/orelor
 function focusDate(el) {
     if (el.type !== 'date') el.type = 'date';
     scrollToElement(el);
@@ -283,7 +269,7 @@ function focusTime(el) {
 
 function blurDate(el) {
     if (!el.value) {
-        el.type = 'text'; // Revine la placeholder-ul "Data" / "Ora" dacă e gol
+        el.type = 'text'; 
     }
 }
 
@@ -332,15 +318,13 @@ function addStationare(btnElement) {
             <button type="button" class="btn-remove hide-on-capture" onclick="this.closest('tr').remove()">Șterge</button>
         </td>
         <td class="input-cell">
-            <div class="sub-label">Data și ora început:</div>
             <div class="datetime-container" style="margin-bottom: 8px;">
-                <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                <input type="text" placeholder="Data început" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                <input type="text" placeholder="Ora început" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
             </div>
-            <div class="sub-label">Data și ora sfârșit:</div>
             <div class="datetime-container">
-                <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                <input type="text" placeholder="Data sfârșit" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                <input type="text" placeholder="Ora sfârșit" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
             </div>
         </td>
     `;
@@ -357,7 +341,6 @@ function sendWhatsApp() {
     const elementsToHide = captureArea.querySelectorAll('.hide-on-capture');
     elementsToHide.forEach(el => el.style.display = 'none');
 
-    // Am schimbat selectorul pentru a prinde și inputurile lăsate pe text
     const inputs = captureArea.querySelectorAll('textarea, input');
     const originalValues = [];
     
@@ -380,7 +363,6 @@ function sendWhatsApp() {
             span.textContent = input.value;
             span.style.fontSize = '12px';
         } else {
-            // Dacă e gol sau lăsat tip text
             span.textContent = input.value.trim() || '-';
         }
         
