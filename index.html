@@ -106,6 +106,13 @@
             cursor: pointer;
             text-align: center;
         }
+        .sub-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+            padding-left: 2px;
+            font-weight: bold;
+        }
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -147,6 +154,9 @@
             }
             input, textarea {
                 font-size: 13px;
+            }
+            .sub-label {
+                font-size: 11px;
             }
         }
     </style>
@@ -200,10 +210,25 @@
                 <td class="label">Încărcări</td>
                 <td class="input-cell"><textarea id="incarcari" rows="1" placeholder="EX: 2" onfocus="scrollToElement(this)" oninput="autoExpand(this)"></textarea></td>
             </tr>
+            
+            <!-- SECȚIUNEA MODIFICATĂ: PERIOADA STAȚIONARE -->
             <tr>
                 <td class="label">Perioada Staționare</td>
-                <td class="input-cell"><textarea id="stationare" rows="1" placeholder="Data si ora inceput - Data si ora sfarsit" onfocus="scrollToElement(this)" oninput="autoExpand(this)"></textarea></td>
+                <td class="input-cell">
+                    <div class="sub-label">Început:</div>
+                    <div class="datetime-container" style="margin-bottom: 8px;">
+                        <input type="date" id="dataInceputStationare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="time" id="oraInceputStationare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                    </div>
+                    <div class="sub-label">Sfârșit:</div>
+                    <div class="datetime-container">
+                        <input type="date" id="dataSfarsitStationare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="time" id="oraSfarsitStationare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                    </div>
+                </td>
             </tr>
+            <!-- SFÂRȘIT SECȚIUNE MODIFICATĂ -->
+
             <tr>
                 <td class="label">Alte Cheltuieli</td>
                 <td class="input-cell"><textarea id="cheltuieli" rows="1" placeholder="EX: Autohof 9 EUR" onfocus="scrollToElement(this)" oninput="autoExpand(this)"></textarea></td>
