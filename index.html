@@ -255,7 +255,7 @@
             
             <tr>
                 <td class="label">Alte Cheltuieli</td>
-                <td class="input-cell"><textarea id="cheltuieli" rows="1" placeholder="EX: Autohof 9 EUR" onfocus="scrollToElement(this)" oninput="autoExpand(this)"></textarea></td>
+                <td class="input-cell"><textarea id="cheltuieli" rows="1" placeholder="Cheltuieli Cash" onfocus="scrollToElement(this)" oninput="autoExpand(this)"></textarea></td>
             </tr>
         </table>
     </div>
@@ -345,7 +345,7 @@ function sendWhatsApp() {
     inputs.forEach(input => {
         originalValues.push({ element: input, parent: input.parentNode, value: input.value });
         const span = document.createElement('span');
-        span.className = 'temp-span'; // Marcaj pentru a le găsi ușor la restaurare
+        span.className = 'temp-span';
         span.style.fontSize = '14px';
         span.style.padding = '6px 4px';
         span.style.display = 'block';
