@@ -192,8 +192,12 @@
                 <td class="label">Data / Ora Plecare</td>
                 <td class="input-cell">
                     <div class="datetime-container">
-                        <input type="text" placeholder="Data" id="dataPlecare" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora" id="oraPlecare" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data" id="dataPlecare" 
+                               ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                        <input type="text" placeholder="Ora" id="oraPlecare" 
+                               ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
                     </div>
                 </td>
             </tr>
@@ -201,8 +205,12 @@
                 <td class="label">Data / Ora Sosire</td>
                 <td class="input-cell">
                     <div class="datetime-container">
-                        <input type="text" placeholder="Data" id="dataSosire" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora" id="oraSosire" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data" id="dataSosire" 
+                               ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                        <input type="text" placeholder="Ora" id="oraSosire" 
+                               ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
                     </div>
                 </td>
             </tr>
@@ -228,12 +236,20 @@
                 <td class="label">Perioada Staționare</td>
                 <td class="input-cell">
                     <div class="datetime-container" style="margin-bottom: 8px;">
-                        <input type="text" placeholder="Data început" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora început" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data început" 
+                               ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                        <input type="text" placeholder="Ora început" 
+                               ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
                     </div>
                     <div class="datetime-container">
-                        <input type="text" placeholder="Data sfârșit" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                        <input type="text" placeholder="Ora sfârșit" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                        <input type="text" placeholder="Data sfârșit" 
+                               ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                        <input type="text" placeholder="Ora sfârșit" 
+                               ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                               onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
                     </div>
                     <button type="button" class="btn-add hide-on-capture" onclick="addStationare(this)">+ Adaugă încă o perioadă</button>
                 </td>
@@ -255,16 +271,20 @@
 </div>
 
 <script>
-function focusDate(el) {
+// Funcții pentru a face selectoarele de dată/oră să se deschidă dintr-un singur tap
+function prepDate(el) {
     if (el.type !== 'date') el.type = 'date';
-    scrollToElement(el);
-    if (el.showPicker) el.showPicker();
 }
 
-function focusTime(el) {
+function prepTime(el) {
     if (el.type !== 'time') el.type = 'time';
+}
+
+function openDate(el) {
     scrollToElement(el);
-    if (el.showPicker) el.showPicker();
+    if (el.showPicker) {
+        try { el.showPicker(); } catch (e) { }
+    }
 }
 
 function blurDate(el) {
@@ -319,12 +339,20 @@ function addStationare(btnElement) {
         </td>
         <td class="input-cell">
             <div class="datetime-container" style="margin-bottom: 8px;">
-                <input type="text" placeholder="Data început" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                <input type="text" placeholder="Ora început" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                <input type="text" placeholder="Data început" 
+                       ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                       onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                <input type="text" placeholder="Ora început" 
+                       ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                       onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
             </div>
             <div class="datetime-container">
-                <input type="text" placeholder="Data sfârșit" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
-                <input type="text" placeholder="Ora sfârșit" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
+                <input type="text" placeholder="Data sfârșit" 
+                       ontouchstart="prepDate(this)" onmousedown="prepDate(this)" 
+                       onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
+                <input type="text" placeholder="Ora sfârșit" 
+                       ontouchstart="prepTime(this)" onmousedown="prepTime(this)" 
+                       onfocus="openDate(this)" onclick="openDate(this)" onblur="blurDate(this)">
             </div>
         </td>
     `;
@@ -345,7 +373,7 @@ function sendWhatsApp() {
     const originalValues = [];
     
     inputs.forEach(input => {
-        originalValues.push({ element: input, parent: input.parentNode, value: input.value });
+        originalValues.push({ element: input, parent: input.parentNode, value: input.value, type: input.type });
         const span = document.createElement('span');
         span.className = 'temp-span';
         span.style.fontSize = '14px';
@@ -374,6 +402,9 @@ function sendWhatsApp() {
         const spans = captureArea.querySelectorAll('.temp-span');
         spans.forEach((span, index) => {
             const item = originalValues[index];
+            // Restaurăm și tipul inputului, pentru a menține starea dacă user-ul vrea să mai modifice ceva
+            item.element.type = item.type; 
+            item.element.value = item.value;
             span.parentNode.replaceChild(item.element, span);
         });
 
