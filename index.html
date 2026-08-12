@@ -97,8 +97,8 @@
             width: 100%;
             overflow: hidden;
         }
-        .datetime-container input[type="date"],
-        .datetime-container input[type="time"] {
+        /* Am actualizat selectorii pentru a se aplica noilor input-uri */
+        .datetime-container input {
             flex: 1;
             min-width: 0;
             padding: 4px 2px;
@@ -171,8 +171,7 @@
             td.input-cell {
                 padding: 2px 4px;
             }
-            .datetime-container input[type="date"],
-            .datetime-container input[type="time"] {
+            .datetime-container input {
                 font-size: 11px;
                 padding: 2px 1px;
             }
@@ -204,8 +203,8 @@
                 <td class="label">Data / Ora Plecare</td>
                 <td class="input-cell">
                     <div class="datetime-container">
-                        <input type="date" id="dataPlecare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                        <input type="time" id="oraPlecare" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="text" placeholder="Data" id="dataPlecare" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora" id="oraPlecare" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
                 </td>
             </tr>
@@ -213,8 +212,8 @@
                 <td class="label">Data / Ora Sosire</td>
                 <td class="input-cell">
                     <div class="datetime-container">
-                        <input type="date" id="dataSosire" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                        <input type="time" id="oraSosire" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="text" placeholder="Data" id="dataSosire" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora" id="oraSosire" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
                 </td>
             </tr>
@@ -241,13 +240,13 @@
                 <td class="input-cell">
                     <div class="sub-label">Data și ora început:</div>
                     <div class="datetime-container" style="margin-bottom: 8px;">
-                        <input type="date" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                        <input type="time" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
                     <div class="sub-label">Data și ora sfârșit:</div>
                     <div class="datetime-container">
-                        <input type="date" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                        <input type="time" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                        <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                        <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
                     </div>
                     <button type="button" class="btn-add hide-on-capture" onclick="addStationare(this)">+ Adaugă încă o perioadă</button>
                 </td>
@@ -269,6 +268,25 @@
 </div>
 
 <script>
+// Funcții noi pentru gestiunea intuitivă a datelor/orelor
+function focusDate(el) {
+    if (el.type !== 'date') el.type = 'date';
+    scrollToElement(el);
+    if (el.showPicker) el.showPicker();
+}
+
+function focusTime(el) {
+    if (el.type !== 'time') el.type = 'time';
+    scrollToElement(el);
+    if (el.showPicker) el.showPicker();
+}
+
+function blurDate(el) {
+    if (!el.value) {
+        el.type = 'text'; // Revine la placeholder-ul "Data" / "Ora" dacă e gol
+    }
+}
+
 function scrollToElement(elem) {
     setTimeout(function() {
         elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -316,13 +334,13 @@ function addStationare(btnElement) {
         <td class="input-cell">
             <div class="sub-label">Data și ora început:</div>
             <div class="datetime-container" style="margin-bottom: 8px;">
-                <input type="date" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                <input type="time" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
             </div>
             <div class="sub-label">Data și ora sfârșit:</div>
             <div class="datetime-container">
-                <input type="date" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
-                <input type="time" onfocus="scrollToElement(this)" onclick="this.showPicker && this.showPicker()">
+                <input type="text" placeholder="Data" onfocus="focusDate(this)" onblur="blurDate(this)" onclick="focusDate(this)">
+                <input type="text" placeholder="Ora" onfocus="focusTime(this)" onblur="blurDate(this)" onclick="focusTime(this)">
             </div>
         </td>
     `;
@@ -339,7 +357,8 @@ function sendWhatsApp() {
     const elementsToHide = captureArea.querySelectorAll('.hide-on-capture');
     elementsToHide.forEach(el => el.style.display = 'none');
 
-    const inputs = captureArea.querySelectorAll('textarea, input[type="date"], input[type="time"]');
+    // Am schimbat selectorul pentru a prinde și inputurile lăsate pe text
+    const inputs = captureArea.querySelectorAll('textarea, input');
     const originalValues = [];
     
     inputs.forEach(input => {
@@ -353,18 +372,15 @@ function sendWhatsApp() {
         span.style.whiteSpace = 'pre-wrap';
         span.style.wordBreak = 'break-word';
         
-        if (input.type === 'date') {
-            if (input.value) {
-                const parts = input.value.split('-');
-                span.textContent = `${parts[2]}.${parts[1]}.${parts[0]}`;
-                span.style.fontSize = '12px';
-            } else {
-                span.textContent = '-';
-            }
-        } else if (input.type === 'time') {
-            span.textContent = input.value ? input.value : '-';
+        if (input.type === 'date' && input.value) {
+            const parts = input.value.split('-');
+            span.textContent = `${parts[2]}.${parts[1]}.${parts[0]}`;
+            span.style.fontSize = '12px';
+        } else if (input.type === 'time' && input.value) {
+            span.textContent = input.value;
             span.style.fontSize = '12px';
         } else {
+            // Dacă e gol sau lăsat tip text
             span.textContent = input.value.trim() || '-';
         }
         
