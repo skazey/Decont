@@ -28,6 +28,24 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid #e0e0e0;
+            position: relative;
+        }
+        .btn-top-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #0d6efd;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            transition: background-color 0.2s;
+        }
+        .btn-top-link:hover {
+            background-color: #0b5ed7;
         }
         .card-to-capture {
             background: #ffffff;
@@ -176,6 +194,11 @@
 <body>
 
 <div class="container">
+    <!-- Buton Calendar Restrictii in stanga sus -->
+    <a href="https://skazey.ro/calendar/" target="_blank" class="btn-top-link hide-on-capture">
+        📅 Calendar Restricții
+    </a>
+
     <div class="card-to-capture" id="captureArea">
         <h2>Formular Decont</h2>
         
@@ -402,7 +425,6 @@ function sendWhatsApp() {
         const spans = captureArea.querySelectorAll('.temp-span');
         spans.forEach((span, index) => {
             const item = originalValues[index];
-            // Restaurăm și tipul inputului, pentru a menține starea dacă user-ul vrea să mai modifice ceva
             item.element.type = item.type; 
             item.element.value = item.value;
             span.parentNode.replaceChild(item.element, span);
