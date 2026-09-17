@@ -194,9 +194,9 @@
 <body>
 
 <div class="container">
-    <!-- Buton Calendar Restrictii in stanga sus -->
-    <a href="https://skazey.ro/calendar/" target="_blank" class="btn-top-link hide-on-capture">
-        📅 Calendar Restricții
+    <!-- Buton Pagina Principala in stanga sus -->
+    <a href="https://skazey.ro/" class="btn-top-link hide-on-capture">
+        🏠 Pagina Principală
     </a>
 
     <div class="card-to-capture" id="captureArea">
@@ -388,8 +388,8 @@ function sendWhatsApp() {
     const numeComplet = document.getElementById('nume').value.trim();
     const textMesaj = numeComplet ? `Decont: ${numeComplet}` : 'Decont completat';
 
-    // Ascundem butoanele de "Adaugă" și "Șterge" pe durata pozei
-    const elementsToHide = captureArea.querySelectorAll('.hide-on-capture');
+    // Ascundem butoanele de "Adaugă" și "Șterge", plus butonul de navigare pe durata pozei
+    const elementsToHide = document.querySelectorAll('.hide-on-capture');
     elementsToHide.forEach(el => el.style.display = 'none');
 
     const inputs = captureArea.querySelectorAll('textarea, input');
@@ -430,7 +430,7 @@ function sendWhatsApp() {
             span.parentNode.replaceChild(item.element, span);
         });
 
-        // Reafișăm butoanele de Adaugă/Șterge
+        // Reafișăm elementele ascunse
         elementsToHide.forEach(el => el.style.display = '');
 
         canvas.toBlob(blob => {
